@@ -1,36 +1,170 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CMSC 127 LTO Information Management System
 
-## Getting Started
+## 📌 Project Overview
 
-First, run the development server:
+This project is a simplified **Land Transportation Office (LTO) Information Management System**.
+
+It allows LTO personnel to:
+
+* Manage drivers, vehicles, registrations, and violations
+* Store and update records
+* Generate SQL-based reports
+
+---
+
+## 🛠 Tech Stack
+
+* **Frontend + Backend:** Next.js (React)
+* **Database:** MariaDB
+* **Language:** JavaScript
+
+---
+
+## 📁 Project Structure
+
+```
+cmsc-127-st1-2l-casmamper-final-project/
+├── database/              # SQL file (schema + data + reports)
+├── src/
+│   ├── app/               # Next.js pages + API routes
+│   │   └── api/
+│   │       └── test-db/   # Test API route for DB connection
+│   ├── lib/
+│   │   └── db.js          # MariaDB connection pool
+├── .env.example           # Environment variables template
+├── README.md
+├── package.json
+```
+
+---
+
+## ⚙️ Local Setup
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+---
+
+### 2. Install MariaDB
+
+Download and install MariaDB:
+https://mariadb.org/download/
+
+During installation:
+
+* Set a **root password**
+* Use default port: `3306`
+
+---
+
+### 3. Import the database
+
+Open MariaDB:
+
+```bash
+mysql -u root -p
+```
+
+Then run:
+
+```sql
+SOURCE C:/path/to/project/database/castillo_guarte_maminta_perez_PM3.sql;
+```
+
+Example:
+
+```sql
+SOURCE C:/Users/YourName/Desktop/cmsc-127-st1-2l-casmamper-final-project/database/castillo_guarte_maminta_perez_PM3.sql;
+```
+
+Then verify:
+
+```sql
+USE LTOIMS;
+SHOW TABLES;
+```
+
+---
+
+### 4. Create your environment file
+
+Copy `.env.example`:
+
+```bash
+cp .env.example .env.local
+```
+
+Then edit:
+
+```env
+DB_PASSWORD=your_mariadb_password
+```
+
+---
+
+### 5. Run the project
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 6. Test database connection
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open:
 
-## Learn More
+```
+http://localhost:3000/api/test-db
+```
 
-To learn more about Next.js, take a look at the following resources:
+If successful, you should see driver data.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ⚠️ Important Notes
 
-## Deploy on Vercel
+* Do **NOT** commit `.env.local`
+* Each developer should use their own MariaDB password
+* Make sure MariaDB is running before starting the app
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚧 Current Status
+
+* [x] Database design (ERD, RM)
+* [x] SQL file (schema + data + reports)
+* [x] Next.js project initialized
+* [x] Database connection established
+* [ ] API routes for each module
+* [ ] Frontend pages
+* [ ] Final integration
+
+---
+
+## 👥 Team Members
+
+* Castillo, Sean Carlo
+* Maminta, Lawrence Andrew
+* Perez, Desmond Rainier
+
+---
+
+## 🎯 Notes for Developers
+
+This repository already includes:
+
+* Database connection setup
+* A working test API route (`/api/test-db`)
+
+You can start working on:
+
+* API routes (`/api/drivers`, `/api/vehicles`, etc.)
+* Frontend pages inside `src/app`
+
+Refer to the test route as a guide for database queries.
+
+---
