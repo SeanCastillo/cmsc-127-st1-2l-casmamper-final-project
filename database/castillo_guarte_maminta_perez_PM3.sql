@@ -56,7 +56,7 @@ CREATE TABLE traffic_violation(
 
 CREATE TABLE vehicle_registration(
 	registrationno CHAR(8) NOT NULL,
-	regstrationdate DATE NOT NULL,
+	registrationdate DATE NOT NULL,
 	expirationdate DATE NOT NULL,
 	registrationstatus VARCHAR(20) NOT NULL,
 	chassisno CHAR(17) NOT NULL,
@@ -184,7 +184,7 @@ SELECT
     YEAR(v.myear) AS model_year,
     v.color,
     vr.registrationno,
-    vr.regstrationdate,
+    vr.registrationdate,
     vr.expirationdate,
     vr.registrationstatus,
     CONCAT(d.fname, ' ', COALESCE(CONCAT(d.mname, ' '), ''), d.lname) AS owner_name
