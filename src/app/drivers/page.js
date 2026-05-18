@@ -122,7 +122,7 @@ export default function DriversPage() {
     <main className="p-6">
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-2xl font-bold">Drivers</h1>
-        <button onClick={openAddModal} className="rounded bg-black px-4 py-2 text-white">
+        <button onClick={openAddModal} className="btn-primary">
           + Add Driver
         </button>
       </div>
@@ -156,8 +156,18 @@ export default function DriversPage() {
                 <td className="border p-2">{driver.licstatus}</td>
                 <td className="border p-2">{formatDate(driver.licexpiration)}</td>
                 <td className="border p-2">
-                  <button onClick={() => openEditModal(driver)} className="mr-2 rounded bg-blue-500 px-2 py-1 text-white text-xs">Edit</button>
-                  <button onClick={() => handleDelete(driver.driverno)} className="rounded bg-red-500 px-2 py-1 text-white text-xs">Delete</button>
+                  <button
+                    onClick={() => openEditModal(driver)}
+                    className="mr-2 btn-primary-sm"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(driver.driverno)}
+                    className="btn-danger-sm"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -171,37 +181,41 @@ export default function DriversPage() {
             <h2 className="mb-4 text-xl font-bold">{editDriver ? "Edit Driver" : "Add Driver"}</h2>
 
             <div className="grid gap-3">
-              <input name="driverno" value={form.driverno} onChange={handleChange} placeholder="Driver No." disabled={!!editDriver} className="rounded border p-2 w-full disabled:bg-gray-100" />
-              <input name="licno" value={form.licno} onChange={handleChange} placeholder="License No." className="rounded border p-2 w-full" />
-              <input name="fname" value={form.fname} onChange={handleChange} placeholder="First Name" className="rounded border p-2 w-full" />
-              <input name="mname" value={form.mname} onChange={handleChange} placeholder="Middle Name" className="rounded border p-2 w-full" />
-              <input name="lname" value={form.lname} onChange={handleChange} placeholder="Last Name" className="rounded border p-2 w-full" />
-              <select name="sex" value={form.sex} onChange={handleChange} className="rounded border p-2 w-full">
+              <input name="driverno" value={form.driverno} onChange={handleChange} placeholder="Driver No." disabled={!!editDriver} className="form-field w-full disabled:bg-slate-100 disabled:text-slate-500" />
+              <input name="licno" value={form.licno} onChange={handleChange} placeholder="License No." className="form-field w-full" />
+              <input name="fname" value={form.fname} onChange={handleChange} placeholder="First Name" className="form-field w-full" />
+              <input name="mname" value={form.mname} onChange={handleChange} placeholder="Middle Name" className="form-field w-full" />
+              <input name="lname" value={form.lname} onChange={handleChange} placeholder="Last Name" className="form-field w-full" />
+              <select name="sex" value={form.sex} onChange={handleChange} className="form-field w-full">
                 <option value="">Select Sex</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </select>
-              <input name="birthdate" value={form.birthdate} onChange={handleChange} type="date" placeholder="Birthdate" className="rounded border p-2 w-full" />
-              <input name="address" value={form.address} onChange={handleChange} placeholder="Address" className="rounded border p-2 w-full" />
-              <select name="lictype" value={form.lictype} onChange={handleChange} className="rounded border p-2 w-full">
+              <input name="birthdate" value={form.birthdate} onChange={handleChange} type="date" placeholder="Birthdate" className="form-field w-full" />
+              <input name="address" value={form.address} onChange={handleChange} placeholder="Address" className="form-field w-full" />
+              <select name="lictype" value={form.lictype} onChange={handleChange} className="form-field w-full">
                 <option value="">Select License Type</option>
                 <option value="Student Permit">Student Permit</option>
                 <option value="Non-Professional">Non-Professional</option>
                 <option value="Professional">Professional</option>
               </select>
-              <select name="licstatus" value={form.licstatus} onChange={handleChange} className="rounded border p-2 w-full">
+              <select name="licstatus" value={form.licstatus} onChange={handleChange} className="form-field w-full">
                 <option value="">Select Status</option>
                 <option value="valid">valid</option>
                 <option value="expired">expired</option>
                 <option value="suspended">suspended</option>
                 <option value="revoked">revoked</option>
               </select>
-              <input name="licexpiration" value={form.licexpiration} onChange={handleChange} type="date" placeholder="License Expiration" className="rounded border p-2 w-full" />
+              <input name="licexpiration" value={form.licexpiration} onChange={handleChange} type="date" placeholder="License Expiration" className="form-field w-full" />
             </div>
 
             <div className="mt-4 flex gap-2 justify-end">
-              <button onClick={() => setShowModal(false)} className="rounded border px-4 py-2">Cancel</button>
-              <button onClick={handleSubmit} className="rounded bg-black px-4 py-2 text-white">{editDriver ? "Update" : "Add"}</button>
+              <button onClick={() => setShowModal(false)} className="btn-secondary">
+                Cancel
+              </button>
+              <button onClick={handleSubmit} className="btn-primary">
+                {editDriver ? "Update" : "Add"}
+              </button>
             </div>
           </div>
         </div>

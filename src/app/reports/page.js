@@ -344,7 +344,7 @@ export default function ReportsPage() {
                         name="licenseType"
                         value={filters.licenseType}
                         onChange={handleChange}
-                        className="rounded border p-2"
+                        className="form-field"
                     >
                         <option value="">All License Types</option>
                         <option value="Student Permit">Student Permit</option>
@@ -356,7 +356,7 @@ export default function ReportsPage() {
                         name="licenseStatus"
                         value={filters.licenseStatus}
                         onChange={handleChange}
-                        className="rounded border p-2"
+                        className="form-field"
                     >
                         <option value="">All Statuses</option>
                         <option value="valid">valid</option>
@@ -369,7 +369,7 @@ export default function ReportsPage() {
                         name="sex"
                         value={filters.sex}
                         onChange={handleChange}
-                        className="rounded border p-2"
+                        className="form-field"
                     >
                         <option value="">All Sexes</option>
                         <option value="Male">Male</option>
@@ -383,7 +383,7 @@ export default function ReportsPage() {
                         onChange={handleChange}
                         placeholder="Min age"
                         min="0"
-                        className="rounded border p-2"
+                        className="form-field"
                     />
 
                     <input
@@ -393,7 +393,7 @@ export default function ReportsPage() {
                         onChange={handleChange}
                         placeholder="Max age"
                         min="0"
-                        className="rounded border p-2"
+                        className="form-field"
                     />
                 </div>
 
@@ -401,12 +401,12 @@ export default function ReportsPage() {
                 <div className="mb-4 flex gap-2">
                     <button
                         onClick={fetchDriverReport}
-                        className="rounded bg-black px-4 py-2 text-white"
+                        className="btn-primary"
                     >
                         Generate Report
                     </button>
 
-                    <button onClick={clearFilters} className="rounded border px-4 py-2">
+                    <button onClick={clearFilters} className="btn-secondary">
                         Clear Filters
                     </button>
                 </div>
@@ -463,12 +463,12 @@ export default function ReportsPage() {
                         value={selectedDriverNo}
                         onChange={(event) => setSelectedDriverNo(event.target.value)}
                         placeholder="Enter driver number (e.g. D000000000001)"
-                        className="rounded border p-2 md:w-80"
+                        className="form-field md:w-80"
                     />
 
                     <button
                         onClick={fetchVehiclesByDriver}
-                        className="rounded bg-black px-4 py-2 text-white"
+                        className="btn-primary"
                     >
                         Generate Report
                     </button>
@@ -526,12 +526,12 @@ export default function ReportsPage() {
                         type="date"
                         value={asOfDate}
                         onChange={(event) => setAsOfDate(event.target.value)}
-                        className="rounded border p-2 md:w-80"
+                        className="form-field md:w-80"
                     />
 
                     <button
                         onClick={fetchExpiredRegistrations}
-                        className="rounded bg-black px-4 py-2 text-white"
+                        className="btn-primary"
                     >
                         Generate Report
                     </button>
@@ -589,7 +589,7 @@ export default function ReportsPage() {
                 <div className="mb-4">
                     <button
                         onClick={fetchInvalidLicenses}
-                        className="rounded bg-black px-4 py-2 text-white"
+                        className="btn-primary"
                     >
                         Generate Report
                     </button>
@@ -647,7 +647,7 @@ export default function ReportsPage() {
                         value={driverViolationFilters.driverNo}
                         onChange={handleDriverViolationFilterChange}
                         placeholder="Driver no. (e.g. D000000000001)"
-                        className="rounded border p-2"
+                        className="form-field"
                     />
 
                     <input
@@ -655,7 +655,7 @@ export default function ReportsPage() {
                         name="startDate"
                         value={driverViolationFilters.startDate}
                         onChange={handleDriverViolationFilterChange}
-                        className="rounded border p-2"
+                        className="form-field"
                     />
 
                     <input
@@ -663,12 +663,12 @@ export default function ReportsPage() {
                         name="endDate"
                         value={driverViolationFilters.endDate}
                         onChange={handleDriverViolationFilterChange}
-                        className="rounded border p-2"
+                        className="form-field"
                     />
 
                     <button
                         onClick={fetchViolationsByDriver}
-                        className="rounded bg-black px-4 py-2 text-white"
+                        className="btn-primary"
                     >
                         Generate Report
                     </button>
@@ -735,12 +735,12 @@ export default function ReportsPage() {
                         onChange={(event) => setViolationYear(event.target.value)}
                         placeholder="Enter year (e.g. 2024)"
                         min="1900"
-                        className="rounded border p-2 md:w-80"
+                        className="form-field md:w-80"
                     />
 
                     <button
                         onClick={fetchViolationsPerType}
-                        className="rounded bg-black px-4 py-2 text-white"
+                        className="btn-primary"
                     >
                         Generate Report
                     </button>
@@ -783,12 +783,12 @@ export default function ReportsPage() {
                         value={violationLocation}
                         onChange={(event) => setViolationLocation(event.target.value)}
                         placeholder="Enter city or region (e.g. Metro Manila)"
-                        className="rounded border p-2 md:w-80"
+                        className="form-field md:w-80"
                     />
 
                     <button
                         onClick={fetchVehiclesByLocation}
-                        className="rounded bg-black px-4 py-2 text-white"
+                        className="btn-primary"
                     >
                         Generate Report
                     </button>
