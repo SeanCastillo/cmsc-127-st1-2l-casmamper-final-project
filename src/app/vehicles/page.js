@@ -74,8 +74,8 @@ export default function VehiclesPage() {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-        ...form,
-        myear: form.myear ? `${form.myear}-01-01` : "",
+          ...form,
+          myear: form.myear ? `${form.myear}-01-01` : "",
         }),
       });
       const result = await response.json();
@@ -119,7 +119,7 @@ export default function VehiclesPage() {
     <main className="p-6">
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-2xl font-bold">Vehicles</h1>
-        <button onClick={openAddModal} className="rounded bg-black px-4 py-2 text-white">
+        <button onClick={openAddModal} className="btn-primary">
           + Add Vehicle
         </button>
       </div>
@@ -153,8 +153,18 @@ export default function VehiclesPage() {
                 <td className="border p-2">{vehicle.color}</td>
                 <td className="border p-2">{getOwnerName(vehicle)}</td>
                 <td className="border p-2">
-                  <button onClick={() => openEditModal(vehicle)} className="mr-2 rounded bg-blue-500 px-2 py-1 text-white text-xs">Edit</button>
-                  <button onClick={() => handleDelete(vehicle.chassisno)} className="rounded bg-red-500 px-2 py-1 text-white text-xs">Delete</button>
+                  <button
+                    onClick={() => openEditModal(vehicle)}
+                    className="mr-2 btn-primary-sm"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(vehicle.chassisno)}
+                    className="btn-danger-sm"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -168,25 +178,29 @@ export default function VehiclesPage() {
             <h2 className="mb-4 text-xl font-bold">{editVehicle ? "Edit Vehicle" : "Add Vehicle"}</h2>
 
             <div className="grid gap-3">
-              <input name="chassisno" value={form.chassisno} onChange={handleChange} placeholder="Chassis No." disabled={!!editVehicle} className="rounded border p-2 w-full disabled:bg-gray-100" />
-              <input name="engineno" value={form.engineno} onChange={handleChange} placeholder="Engine No." className="rounded border p-2 w-full" />
-              <input name="plateno" value={form.plateno} onChange={handleChange} placeholder="Plate No." className="rounded border p-2 w-full" />
-              <input name="color" value={form.color} onChange={handleChange} placeholder="Color" className="rounded border p-2 w-full" />
-              <input name="myear" value={form.myear} onChange={handleChange} placeholder="Year (e.g. 2020)" type="number" className="rounded border p-2 w-full" />
-              <select name="vehicletype" value={form.vehicletype} onChange={handleChange} className="rounded border p-2 w-full">
+              <input name="chassisno" value={form.chassisno} onChange={handleChange} placeholder="Chassis No." disabled={!!editVehicle} className="form-field w-full disabled:bg-slate-100 disabled:text-slate-500" />
+              <input name="engineno" value={form.engineno} onChange={handleChange} placeholder="Engine No." className="form-field w-full" />
+              <input name="plateno" value={form.plateno} onChange={handleChange} placeholder="Plate No." className="form-field w-full" />
+              <input name="color" value={form.color} onChange={handleChange} placeholder="Color" className="form-field w-full" />
+              <input name="myear" value={form.myear} onChange={handleChange} placeholder="Year (e.g. 2020)" type="number" className="form-field w-full" />
+              <select name="vehicletype" value={form.vehicletype} onChange={handleChange} className="form-field w-full">
                 <option value="">Select Vehicle Type</option>
                 <option value="motorcycle">Motorcycle</option>
                 <option value="private car">Private Car</option>
                 <option value="public utility vehicle">Public Utility Vehicle</option>
               </select>
-              <input name="model" value={form.model} onChange={handleChange} placeholder="Model" className="rounded border p-2 w-full" />
-              <input name="make" value={form.make} onChange={handleChange} placeholder="Make" className="rounded border p-2 w-full" />
-              <input name="driverno" value={form.driverno} onChange={handleChange} placeholder="Driver No. (e.g. D000000000001)" className="rounded border p-2 w-full" />
+              <input name="model" value={form.model} onChange={handleChange} placeholder="Model" className="form-field w-full" />
+              <input name="make" value={form.make} onChange={handleChange} placeholder="Make" className="form-field w-full" />
+              <input name="driverno" value={form.driverno} onChange={handleChange} placeholder="Driver No. (e.g. D000000000001)" className="form-field w-full" />
             </div>
 
             <div className="mt-4 flex gap-2 justify-end">
-              <button onClick={() => setShowModal(false)} className="rounded border px-4 py-2">Cancel</button>
-              <button onClick={handleSubmit} className="rounded bg-black px-4 py-2 text-white">{editVehicle ? "Update" : "Add"}</button>
+              <button onClick={() => setShowModal(false)} className="btn-secondary">
+                Cancel
+              </button>
+              <button onClick={handleSubmit} className="btn-primary">
+                {editVehicle ? "Update" : "Add"}
+              </button>
             </div>
           </div>
         </div>

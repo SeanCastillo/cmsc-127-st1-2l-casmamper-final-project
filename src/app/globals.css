@@ -24,3 +24,61 @@ td,
 th {
   border-color: #cbd5e1;
 }
+
+/* reusable styled buttons */
+.btn-primary {
+  @apply rounded-lg bg-blue-900 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2;
+}
+
+.btn-secondary {
+  @apply rounded-lg border border-blue-900 bg-white px-4 py-2 font-medium text-blue-900 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2;
+}
+
+/* reusable styled danger button */
+.btn-danger {
+  @apply rounded-lg bg-red-700 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2;
+}
+
+.btn-danger-sm {
+  @apply rounded-lg bg-red-700 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2;
+}
+
+.btn-primary-sm {
+  @apply rounded-lg bg-blue-900 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2;
+}
+
+/* reusable styled form fields */
+.form-field {
+  @apply h-10 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition placeholder:text-slate-400 focus:border-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-100;
+}
+
+/* custom dropdown arrow with proper spacing */
+select.form-field {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.5 7.5L10 12L14.5 7.5' stroke='%23334155' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+}
+
+/* keeps native date input clean without pushing the calendar icon too far */
+input[type="date"].form-field {
+  padding-right: 0.75rem;
+  color-scheme: light;
+}
+
+input[type="date"].form-field::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+/* reusable styled labels */
+.form-label {
+  @apply text-sm font-medium text-slate-700;
+}
+
+/* reusable report/card container */
+.section-card {
+  @apply rounded-xl border border-slate-200 bg-white p-5 shadow-sm;
+}
