@@ -6,53 +6,123 @@ export default function VehiclesPage() {
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [editVehicle, setEditVehicle] = useState(null);
+  const [form, setForm] = useState({
+    chassisno: "",
+    engineno: "",
+    plateno: "",
+    color: "",
+    myear: "",
+    vehicletype: "",
+    model: "",
+    make: "",
+    driverno: "",
+  });
 
   useEffect(() => {
-    async function fetchVehicles() {
-      try {
-        // fetch vehicle records from the api route
-        const response = await fetch("/api/vehicles");
-        const result = await response.json();
-
-        if (!result.success) {
-          throw new Error(result.message || "Failed to fetch vehicles");
-        }
-
-        setVehicles(result.data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-
     fetchVehicles();
   }, []);
 
+  async function fetchVehicles() {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/vehicles");
+      const result = await response.json();
+      if (!result.success) throw new Error(result.message);
+      setVehicles(result.data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
+  function openAddModal() {
+    setEditVehicle(null);
+    setForm({
+      chassisno: "", engineno: "", plateno: "", color: "",
+      myear: "", vehicletype: "", model: "", make: "", driverno: "",
+    });
+    setShowModal(true);
+  }
+
+  function openEditModal(vehicle) {
+    setEditVehicle(vehicle);
+    setForm({
+      chassisno: vehicle.chassisno,
+      engineno: vehicle.engineno,
+      plateno: vehicle.plateno,
+      color: vehicle.color,
+      myear: vehicle.myear ? new Date(vehicle.myear).getFullYear().toString() : "",
+      vehicletype: vehicle.vehicletype,
+      model: vehicle.model,
+      make: vehicle.make,
+      driverno: vehicle.driverno,
+    });
+    setShowModal(true);
+  }
+
+  async function handleSubmit() {
+    try {
+      const method = editVehicle ? "PUT" : "POST";
+      const response = await fetch("/api/vehicles", {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+        ...form,
+        myear: form.myear ? `${form.myear}-01-01` : "",
+        }),
+      });
+      const result = await response.json();
+      if (!result.success) throw new Error(result.message);
+      setShowModal(false);
+      fetchVehicles();
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
+  async function handleDelete(chassisno) {
+    if (!confirm("Are you sure you want to delete this vehicle?")) return;
+    try {
+      const response = await fetch("/api/vehicles", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chassisno }),
+      });
+      const result = await response.json();
+      if (!result.success) throw new Error(result.message);
+      fetchVehicles();
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
   function formatYear(dateString) {
     if (!dateString) return "N/A";
-
-    // extract the year from the database date value
     return new Date(dateString).getFullYear();
   }
 
   function getOwnerName(vehicle) {
-    return [vehicle.fname, vehicle.mname, vehicle.lname]
-      .filter(Boolean)
-      .join(" ");
+    return [vehicle.fname, vehicle.mname, vehicle.lname].filter(Boolean).join(" ");
   }
 
-  if (loading) {
-    return <main className="p-6">Loading vehicles...</main>;
-  }
-
-  if (error) {
-    return <main className="p-6">Error: {error}</main>;
-  }
+  if (loading) return <main className="p-6">Loading vehicles...</main>;
+  if (error) return <main className="p-6">Error: {error}</main>;
 
   return (
     <main className="p-6">
-      <h1 className="mb-4 text-2xl font-bold">Vehicles</h1>
+      <div className="mb-4 flex items-center justify-between">
+        <h1 className="text-2xl font-bold">Vehicles</h1>
+        <button onClick={openAddModal} className="rounded bg-black px-4 py-2 text-white">
+          + Add Vehicle
+        </button>
+      </div>
 
       <div className="overflow-x-auto rounded-lg border">
         <table className="w-full border-collapse text-sm">
@@ -67,10 +137,9 @@ export default function VehiclesPage() {
               <th className="border p-2">Year</th>
               <th className="border p-2">Color</th>
               <th className="border p-2">Owner</th>
-              <th className="border p-2">License No.</th>
+              <th className="border p-2">Actions</th>
             </tr>
           </thead>
-
           <tbody>
             {vehicles.map((vehicle) => (
               <tr key={vehicle.chassisno}>
@@ -83,12 +152,45 @@ export default function VehiclesPage() {
                 <td className="border p-2">{formatYear(vehicle.myear)}</td>
                 <td className="border p-2">{vehicle.color}</td>
                 <td className="border p-2">{getOwnerName(vehicle)}</td>
-                <td className="border p-2">{vehicle.licno}</td>
+                <td className="border p-2">
+                  <button onClick={() => openEditModal(vehicle)} className="mr-2 rounded bg-blue-500 px-2 py-1 text-white text-xs">Edit</button>
+                  <button onClick={() => handleDelete(vehicle.chassisno)} className="rounded bg-red-500 px-2 py-1 text-white text-xs">Delete</button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-lg max-h-screen overflow-y-auto">
+            <h2 className="mb-4 text-xl font-bold">{editVehicle ? "Edit Vehicle" : "Add Vehicle"}</h2>
+
+            <div className="grid gap-3">
+              <input name="chassisno" value={form.chassisno} onChange={handleChange} placeholder="Chassis No." disabled={!!editVehicle} className="rounded border p-2 w-full disabled:bg-gray-100" />
+              <input name="engineno" value={form.engineno} onChange={handleChange} placeholder="Engine No." className="rounded border p-2 w-full" />
+              <input name="plateno" value={form.plateno} onChange={handleChange} placeholder="Plate No." className="rounded border p-2 w-full" />
+              <input name="color" value={form.color} onChange={handleChange} placeholder="Color" className="rounded border p-2 w-full" />
+              <input name="myear" value={form.myear} onChange={handleChange} placeholder="Year (e.g. 2020)" type="number" className="rounded border p-2 w-full" />
+              <select name="vehicletype" value={form.vehicletype} onChange={handleChange} className="rounded border p-2 w-full">
+                <option value="">Select Vehicle Type</option>
+                <option value="motorcycle">Motorcycle</option>
+                <option value="private car">Private Car</option>
+                <option value="public utility vehicle">Public Utility Vehicle</option>
+              </select>
+              <input name="model" value={form.model} onChange={handleChange} placeholder="Model" className="rounded border p-2 w-full" />
+              <input name="make" value={form.make} onChange={handleChange} placeholder="Make" className="rounded border p-2 w-full" />
+              <input name="driverno" value={form.driverno} onChange={handleChange} placeholder="Driver No. (e.g. D000000000001)" className="rounded border p-2 w-full" />
+            </div>
+
+            <div className="mt-4 flex gap-2 justify-end">
+              <button onClick={() => setShowModal(false)} className="rounded border px-4 py-2">Cancel</button>
+              <button onClick={handleSubmit} className="rounded bg-black px-4 py-2 text-white">{editVehicle ? "Update" : "Add"}</button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
