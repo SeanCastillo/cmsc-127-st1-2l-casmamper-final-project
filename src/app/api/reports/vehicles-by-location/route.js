@@ -40,9 +40,9 @@ export async function GET(request) {
         d.fname,
         d.mname,
         d.lname
-      FROM TRAFFIC_VIOLATION tv
-      JOIN VEHICLE v ON tv.chassisno = v.chassisno
-      JOIN DRIVER d ON tv.driverno = d.driverno
+      FROM traffic_violation tv
+      JOIN vehicle v ON tv.chassisno = v.chassisno
+      JOIN driver d ON tv.driverno = d.driverno
       WHERE tv.violationloc LIKE ?
       ORDER BY tv.violationdate DESC
       `,

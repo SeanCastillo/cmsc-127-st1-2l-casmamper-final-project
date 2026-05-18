@@ -39,9 +39,9 @@ export async function GET(request) {
         d.fname,
         d.mname,
         d.lname
-      FROM VEHICLE_REGISTRATION r
-      JOIN VEHICLE v ON r.chassisno = v.chassisno
-      JOIN DRIVER d ON v.driverno = d.driverno
+      FROM vehicle_registration r
+      JOIN vehicle v ON r.chassisno = v.chassisno
+      JOIN driver d ON v.driverno = d.driverno
       WHERE r.expirationdate < ?
       ORDER BY r.expirationdate
       `,

@@ -36,8 +36,8 @@ export async function GET(request) {
         d.fname,
         d.mname,
         d.lname
-      FROM VEHICLE v
-      JOIN DRIVER d ON v.driverno = d.driverno
+      FROM vehicle v
+      JOIN driver d ON v.driverno = d.driverno
       WHERE v.driverno = ?
       ORDER BY v.plateno
       `,

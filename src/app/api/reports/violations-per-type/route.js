@@ -25,7 +25,7 @@ export async function GET(request) {
       SELECT
         violationtype,
         COUNT(*) AS totalviolations
-      FROM TRAFFIC_VIOLATION
+      FROM traffic_violation
       WHERE YEAR(violationdate) = ?
       GROUP BY violationtype
       ORDER BY totalviolations DESC, violationtype

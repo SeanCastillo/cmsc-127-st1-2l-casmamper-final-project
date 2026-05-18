@@ -61,7 +61,7 @@ export async function GET(request) {
         lictype,
         licstatus,
         licexpiration
-      FROM DRIVER
+      FROM driver
       ${whereClause}
       ORDER BY lname, fname
       `,

@@ -26,9 +26,9 @@ export async function GET() {
         v.make,
         v.model,
         v.vehicletype
-      FROM TRAFFIC_VIOLATION tv
-      JOIN DRIVER d ON tv.driverno = d.driverno
-      JOIN VEHICLE v ON tv.chassisno = v.chassisno
+      FROM traffic_violation tv
+      JOIN driver d ON tv.driverno = d.driverno
+      JOIN vehicle v ON tv.chassisno = v.chassisno
       ORDER BY tv.violationdate DESC
     `);
 

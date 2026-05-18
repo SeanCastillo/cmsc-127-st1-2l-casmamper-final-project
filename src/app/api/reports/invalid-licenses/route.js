@@ -20,7 +20,7 @@ export async function GET() {
         lictype,
         licstatus,
         licexpiration
-      FROM DRIVER
+      FROM driver
       WHERE licstatus IN ('expired', 'suspended')
          OR licexpiration < CURDATE()
       ORDER BY licstatus, licexpiration
