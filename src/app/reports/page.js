@@ -333,7 +333,7 @@ export default function ReportsPage() {
                 Generate SQL-based reports from the LTOIMS database.
             </p>
 
-            <section className="mb-8 rounded-lg border p-4">
+            <section className="mb-8 section-card">
                 <h2 className="mb-4 text-xl font-semibold">
                     Registered Drivers Report
                 </h2>
@@ -451,7 +451,7 @@ export default function ReportsPage() {
                 </div>
             </section>
 
-            <section className="mb-8 rounded-lg border p-4">
+            <section className="mb-8 section-card">
                 <h2 className="mb-4 text-xl font-semibold">
                     Vehicles Owned by Driver Report
                 </h2>
@@ -515,7 +515,7 @@ export default function ReportsPage() {
                 </div>
             </section>
 
-            <section className="mb-8 rounded-lg border p-4">
+            <section className="mb-8 section-card">
                 <h2 className="mb-4 text-xl font-semibold">
                     Expired Registrations Report
                 </h2>
@@ -580,7 +580,7 @@ export default function ReportsPage() {
                 </div>
             </section>
 
-            <section className="mb-8 rounded-lg border p-4">
+            <section className="mb-8 section-card">
                 <h2 className="mb-4 text-xl font-semibold">
                     Expired or Suspended Licenses Report
                 </h2>
@@ -634,7 +634,7 @@ export default function ReportsPage() {
                 </div>
             </section>
 
-            <section className="mb-8 rounded-lg border p-4">
+            <section className="mb-8 section-card">
                 <h2 className="mb-4 text-xl font-semibold">
                     Violations by Driver Report
                 </h2>
@@ -722,7 +722,7 @@ export default function ReportsPage() {
                 </div>
             </section>
 
-            <section className="mb-8 rounded-lg border p-4">
+            <section className="mb-8 section-card">
                 <h2 className="mb-4 text-xl font-semibold">
                     Violations per Type Report
                 </h2>
@@ -771,7 +771,7 @@ export default function ReportsPage() {
                 </div>
             </section>
 
-            <section className="mb-8 rounded-lg border p-4">
+            <section className="mb-8 section-card">
                 <h2 className="mb-4 text-xl font-semibold">
                     Vehicles Involved in Violations by Location Report
                 </h2>
